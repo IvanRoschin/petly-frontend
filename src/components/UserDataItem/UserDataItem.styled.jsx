@@ -1,48 +1,55 @@
 import styled from 'styled-components';
+import { theme } from 'globalStyles/theme';
+import { ReactComponent as EditPenIcon } from '../../images/svg/pensil.svg';
 import Flatpickr from 'react-flatpickr';
 import 'flatpickr/dist/themes/material_orange.css';
-import { theme } from 'globalStyles/theme';
-import { ReactComponent as PensilIcon } from 'images/svg/pensil.svg';
-import { ReactComponent as CheckIcon } from 'images/svg/check.svg';
 
-export const InfoItem = styled.li`
-  :not(:last-child) {
-    margin-bottom: 8px;
+export const DataInputWrapp = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Form = styled.form``;
+
+export const IconPen = styled(EditPenIcon)``;
+
+export const Label = styled.label`
+  display: inline-block;
+  font-family: 'Manrope';
+  font-weight: ${prop => prop.theme.fontWeights.normal};
+  font-size: 12px;
+  line-height: 1.39;
+  color: ${prop => prop.theme.colors.black};
+  min-width: 60px;
+  @media (min-width: ${p => p.theme.breakpoints[1]}) {
+    width: 119px;
+    font-size: 18px;
+  }
+  @media (min-width: ${p => p.theme.breakpoints[2]}) {
+    width: 96px;
   }
 `;
 
-export const InfoForm = styled.form`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 9px;
+export const LabelFlatpickr = styled.label`
+  display: inline-block;
+  font-weight: ${prop => prop.theme.fontWeights.normal};
+  font-size: 12px;
+  color: ${prop => prop.theme.colors.black};
+  line-height: 1.39;
+  width: 90px;
+  min-width: 60px;
 
   @media (min-width: ${p => p.theme.breakpoints[1]}) {
-    gap: 24px;
+    width: 119px;
+    font-size: 18px;
+  }
+  @media (min-width: ${p => p.theme.breakpoints[2]}) {
+    width: 96px;
   }
 `;
 
-export const InfoField = styled.label`
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-`;
-
-export const InfoProp = styled.p`
-  font-size: ${p => p.theme.fontSizes[0]};
-  font-weight: ${p => p.theme.fontWeights.medium};
-
-  color: ${p => p.theme.colors.text};
-
-  @media (min-width: ${p => p.theme.breakpoints[1]}) {
-    font-size: ${theme.fontSizes[3]};
-  }
-`;
-
-export const InfoInput = styled.input`
-  max-width: 159px;
+export const Input = styled.input`
+  width: 150px;
   padding: 4px 14px;
   border: ${({ theme, disabled }) =>
     disabled ? theme.borders.transparent : theme.borders.input};
@@ -61,14 +68,29 @@ export const InfoInput = styled.input`
   }
 
   @media (min-width: ${p => p.theme.breakpoints[1]}) {
-    max-width: 216px;
+    width: 100%;
     padding: 3px 12px 4px 12px;
     font-size: ${theme.fontSizes[3]};
+  }
+  @media (min-width: ${p => p.theme.breakpoints[2]}) {
+    width: 100%;
+    padding: 3px 12px 4px 12px;
+    font-size: ${theme.fontSizes[3]};
+  }
+`;
+
+export const InputFlatpickrWrapp = styled.div`
+  width: 120px;
+  @media (min-width: ${p => p.theme.breakpoints[1]}) {
+    width: 100%;
+  }
+  @media (min-width: ${p => p.theme.breakpoints[2]}) {
+    width: 100%;
   }
 `;
 
 export const FlatpickrStyled = styled(Flatpickr)`
-  max-width: 159px;
+  width: 100%;
   padding: 4px 14px;
   border: ${({ theme, disabled }) =>
     disabled ? theme.borders.transparent : theme.borders.input};
@@ -87,82 +109,61 @@ export const FlatpickrStyled = styled(Flatpickr)`
   }
 
   @media (min-width: ${p => p.theme.breakpoints[1]}) {
-    max-width: 216px;
     padding: 3px 12px 4px 12px;
     font-size: ${theme.fontSizes[3]};
   }
 `;
 
-export const InfoButton = styled.button`
+export const InputWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  position: relative;
+  margin-top: 3px;
   align-items: center;
-  width: 20px;
-  height: 20px;
-  padding: 0;
-  border-radius: ${p => p.theme.radii.circular};
-  border: ${p => p.theme.borders.none};
-
-  color: ${({ theme, disabled }) =>
-    disabled ? 'rgba(17, 17, 17, 0.6)' : theme.colors.accent};
-  background-color: ${p => p.theme.colors.background};
-
-  transition: ${p => p.theme.transition.main};
-  cursor: pointer;
-
-  &:hover {
-    color: ${({ theme, disabled }) =>
-      disabled ? 'rgba(17, 17, 17, 0.6)' : theme.colors.white};
-    background-color: ${({ theme, disabled }) =>
-      disabled ? theme.colors.background : theme.colors.accent};
-  }
-
   @media (min-width: ${p => p.theme.breakpoints[1]}) {
+    margin-top: 7px;
+  }
+`;
+
+export const EditBtn = styled.button`
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  background-color: ${prop => prop.theme.colors.background};
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  fill: ${prop => prop.theme.colors.accent};
+
+  &.btn-active:hover {
+    scale: 1.1;
+    fill: ${prop => prop.theme.colors.accentBtn};
+  
+    @media (min-width: ${p => p.theme.breakpoints[1]}) {
     width: 32px;
     height: 32px;
-  }
+}
+
 `;
 
-export const Pensil = styled(PensilIcon)`
-  display: inline-block;
-  width: 12.5px;
-  height: 12.5px;
-  fill: currentColor;
-
-  @media (min-width: ${p => p.theme.breakpoints[1]}) {
-    width: 20px;
-    height: 20px;
-  }
-`;
-
-export const Check = styled(CheckIcon)`
-  display: inline-block;
-  width: 12.5px;
-  height: 12.5px;
-  fill: currentColor;
-
-  @media (min-width: ${p => p.theme.breakpoints[1]}) {
-    width: 20px;
-    height: 20px;
-  }
-`;
-
-export const Error = styled.p`
+export const ErrorMessage = styled.div`
   position: absolute;
-  left: 81px;
-  bottom: -13px;
-
+  transform: translate(0px, 0px);
   font-size: 10px;
-
-  color: ${theme.colors.error};
-
+  color: red;
   @media (min-width: ${p => p.theme.breakpoints[1]}) {
-    left: 125px;
-    bottom: -15px;
-    font-size: ${theme.fontSizes[0]};
+    transform: translate(132px, 0px);
   }
-
   @media (min-width: ${p => p.theme.breakpoints[2]}) {
-    left: 129px;
+    transform: translate(90px, 0px);
+    margin-left: ${prop => (prop.isDateEdit ? '10px' : 0)};
   }
+`;
+
+export const NotAuthorized = styled.div`
+  font-family: 'Manrope';
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40%;
 `;

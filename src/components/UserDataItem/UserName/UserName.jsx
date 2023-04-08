@@ -57,7 +57,7 @@ export const UserName = ({ onUpdate, isDisabled }) => {
   return (
     <InfoForm onSubmit={handleSubmit}>
       <InfoField>
-        <InfoProp>{t('Name')}:</InfoProp>
+        <InfoField>{t('Name')}:</InfoField>
         <InfoInput
           type="text"
           name="name"
