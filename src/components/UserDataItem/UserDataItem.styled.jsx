@@ -1,21 +1,60 @@
 import styled from 'styled-components';
+import Flatpickr from 'react-flatpickr';
+import Select from 'react-select';
+
+import 'flatpickr/dist/themes/material_orange.css';
 import { theme } from 'globalStyles/theme';
 import { ReactComponent as EditPenIcon } from '../../images/svg/pensil.svg';
-import Flatpickr from 'react-flatpickr';
-import 'flatpickr/dist/themes/material_orange.css';
+import { ReactComponent as EditSaveIcon } from '../../images/svg/save.svg';
+
+export const SelectInput = styled(Select)`
+  width: 150px;
+  padding: 4px 14px;
+
+  font-size: ${p => p.theme.fontSizes[0]};
+  font-weight: ${p => p.theme.fontWeights.normal};
+
+  color: ${p => p.theme.colors.text};
+
+  ::placeholder {
+    color: ${({ theme, disabled }) => disabled && theme.colors.text};
+  }
+
+  @media (min-width: ${p => p.theme.breakpoints[1]}) {
+    width: 100%;
+    padding: 3px 12px 4px 12px;
+    font-size: ${theme.fontSizes[3]};
+  }
+  @media (min-width: ${p => p.theme.breakpoints[2]}) {
+    width: 100%;
+    padding: 3px 12px 4px 12px;
+    font-size: ${theme.fontSizes[3]};
+  }
+`;
+
+export const IconPen = styled(EditPenIcon)`
+  width: 20px;
+  height: 20px;
+`;
+export const SaveIcon = styled(EditSaveIcon)`
+  width: 20px;
+  height: 20px;
+`;
+
+export const Form = styled.form`
+  gap: 9px;
+  @media (min-width: ${p => p.theme.breakpoints[1]}) {
+    gap: 24px;
+  }
+`;
 
 export const DataInputWrapp = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-export const Form = styled.form``;
-
-export const IconPen = styled(EditPenIcon)``;
-
 export const Label = styled.label`
   display: inline-block;
-  font-family: 'Manrope';
   font-weight: ${prop => prop.theme.fontWeights.normal};
   font-size: 12px;
   line-height: 1.39;
@@ -80,6 +119,7 @@ export const Input = styled.input`
 `;
 
 export const InputFlatpickrWrapp = styled.div`
+  font-size: 18px;
   width: 120px;
   @media (min-width: ${p => p.theme.breakpoints[1]}) {
     width: 100%;

@@ -19,7 +19,6 @@ const StepTwo = props => {
   const [cityValue, setCityValue] = useState(null);
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
   const handleOnInputChange = value => {
     if (value.length >= 3) {
       setCityValue(value);
@@ -93,7 +92,6 @@ const StepTwo = props => {
         onlyCountries={['ua']}
         country={'ua'}
         countryCodeEditable={false}
-        // defaultCountry={'ua'}
         errors={props.errors}
         value={props.values.phone}
         touched={props.touched}
