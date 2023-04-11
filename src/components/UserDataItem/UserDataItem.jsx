@@ -2,15 +2,16 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import css from './UserPhoneInput.css';
 import React, { useState, useEffect, useCallback } from 'react';
-
 import toast from 'react-hot-toast';
 import i18n from 'i18n';
 import { getRegionsOfCities } from 'helpers/getRegionsOfCities';
-
 import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
-import 'flatpickr/dist/themes/material_orange.css';
+
 import { Ukrainian } from 'flatpickr/dist/l10n/uk.js';
+import { English } from 'flatpickr/dist/l10n/default.js';
+import 'flatpickr/dist/themes/material_orange.css';
+
 import { userUpdateSchema } from 'helpers/validationSchemas';
 import { getFormatedDate } from 'helpers/getFormatedDate';
 
@@ -18,10 +19,10 @@ import {
   DataInputWrapp,
   Form,
   Label,
-  LabelFlatpickr,
   Input,
-  FlatpickrStyled,
   InputFlatpickrWrapp,
+  LabelFlatpickr,
+  FlatpickrStyled,
   InputWrapper,
   EditBtn,
   ErrorMessage,
@@ -36,63 +37,24 @@ import { useAuth } from 'hooks';
 import { commonRoutes } from 'api/baseSettings';
 
 const UserDataItem = () => {
-  const [cityValue, setCityValue] = useState(null);
-  const [results, setResults] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const options = results.map(
-    ({ _id, useCounty, stateEn, cityEn, countyEn }) => {
-      if (Number(useCounty)) {
-        return {
-          value: _id,
-          label: `${cityEn}, ${countyEn}, ${stateEn} region`,
-        };
-      } else {
-        return {
-          value: _id,
-          label: `${cityEn}, ${stateEn} region`,
-        };
-      }
-    }
-  );
-
-  const handleOnInputChange = value => {
-    if (value.length >= 3) {
-      setCityValue(value);
-    }
-  };
-  useEffect(() => {
-    async function getCities() {
-      if (cityValue < 3) {
-        return;
-      }
-
-      try {
-        setIsLoading(true);
-
-        const { data } = await commonRoutes.get(
-          `api/cities?query=${cityValue}`
-        );
-        setResults(getRegionsOfCities(data));
-
-        setIsLoading(false);
-      } catch (error) {
-        toast.error(i18n.t('Try_again'));
-      }
-    }
-
-    getCities();
-  }, [cityValue]);
+  const language = localStorage.getItem('i18nextLng');
+  let locale = English;
+  if (language === 'uk' || language.includes('uk')) {
+    locale = Ukrainian;
+  }
 
   const { t } = useTranslation();
   const { user } = useAuth();
-  const language = localStorage.getItem('i18nextLng');
 
   const [isNameDisabled, setIsNameDisabled] = useState(true);
   const [isEmailDisabled, setIsEmailDisabled] = useState(true);
   const [isBirthdayDisabled, setIsBirthdayDisabled] = useState(true);
   const [isPhoneDisabled, setIsPhoneDisabled] = useState(true);
   const [isCityDisabled, setIsCityDisabled] = useState(true);
+  const [cityValue, setCityValue] = useState(null);
+  const [results, setResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  // const [startDate, setStartDate] = useState(new Date(user?.birthDate));
 
   const iconColorDisabled = 'rgba(0,0,0,0.6)';
   const dispatch = useDispatch();
@@ -125,6 +87,46 @@ const UserDataItem = () => {
       isCityDisabled,
     ]
   );
+  const options = results.map(
+    ({ _id, useCounty, stateEn, cityEn, countyEn }) => {
+      if (Number(useCounty)) {
+        return {
+          value: _id,
+          label: `${cityEn}, ${countyEn}, ${stateEn} region`,
+        };
+      } else {
+        return {
+          value: _id,
+          label: `${cityEn}, ${stateEn} region`,
+        };
+      }
+    }
+  );
+
+  const handleOnInputChange = value => {
+    if (value.length >= 3) {
+      setCityValue(value);
+    }
+  };
+  useEffect(() => {
+    async function getCities() {
+      if (cityValue < 3) {
+        return;
+      }
+      try {
+        setIsLoading(true);
+        const { data } = await commonRoutes.get(
+          `api/cities?query=${cityValue}`
+        );
+        setResults(getRegionsOfCities(data));
+        setIsLoading(false);
+      } catch (error) {
+        toast.error(i18n.t('Try_again'));
+      }
+    }
+
+    getCities();
+  }, [cityValue]);
 
   const {
     values,
@@ -144,10 +146,8 @@ const UserDataItem = () => {
     },
     validationSchema: userUpdateSchema,
 
-    onSubmit: (values, resetForm) => {
-      console.log(values);
+    onSubmit: values => {
       dispatch(updateInfo(values));
-      resetForm();
     },
   });
 
@@ -237,48 +237,46 @@ const UserDataItem = () => {
               {t('Birthday')}:
             </LabelFlatpickr>
             <InputFlatpickrWrapp>
-              {language === 'uk' && (
-                <FlatpickrStyled
-                  data-enable-time
-                  name="birthDate"
-                  value={values.birthDate}
-                  placeholder={getFormatedDate(user)}
-                  disabled={isBirthdayDisabled}
-                  options={{
-                    maxDate: 'today',
-                    enableTime: false,
-                    dateFormat: 'd.m.Y',
-                    locale: Ukrainian,
-                  }}
-                  onChange={date => {
-                    setFieldValue('birthDate', date[0]);
-                  }}
-                />
-              )}
-              {language !== 'uk' && (
-                <FlatpickrStyled
-                  data-enable-time
-                  name="birthDate"
-                  type="date"
-                  disableMobile={isBirthdayDisabled}
-                  value={values.birthDate}
-                  placeholder={getFormatedDate(user)}
-                  onChange={date => {
-                    setFieldValue('birthDate', date[0]);
-                  }}
-                  options={{
-                    maxDate: 'today',
-                    enableTime: false,
-                    dateFormat: 'd.m.Y',
-                  }}
-                />
-              )}
+              <FlatpickrStyled
+                // selected={startDate}
+                // openToDate={new Date(1993, 0, 1)}
+                // active={!isBirthdayDisabled}
+                // dateFormat="dd.MM.y"
+                // name="birthDate"
+                // locale="uk"
+                // placeholderText={'00.00.0000'}
+                // disabled={isBirthdayDisabled}
+                // onChange={date => {
+                //   setFieldValue('birthDate', date);
+                //   setStartDate(date);
+                // }}
+                // minDate={new Date('01.01.1900')}
+                // maxDate={new Date()}
+                // showDisabledMonthNavigation
+                // shouldCloseOnSelect={true}
+
+                data-enable-time
+                name="birthDate"
+                value={values.birthDate}
+                placeholder={getFormatedDate(user)}
+                disabled={isBirthdayDisabled}
+                options={{
+                  maxDate: 'today',
+                  enableTime: false,
+                  dateFormat: 'd.m.Y',
+                  locale: locale,
+                }}
+                onChange={date => {
+                  setFieldValue('birthDate', date[0]);
+                }}
+              />
             </InputFlatpickrWrapp>
             {isBirthdayDisabled && (
               <EditBtn
                 type="submit"
                 disable={isAnyEditing}
                 className={isAnyEditing ? '' : 'btn-active'}
+                disabled={!isBirthdayDisabled}
                 onClick={() => setIsBirthdayDisabled(!isBirthdayDisabled)}
               >
                 <IconPen fill={isAnyEditing ? iconColorDisabled : undefined} />
@@ -378,6 +376,9 @@ const UserDataItem = () => {
                 }),
               }}
             />
+            {touched.city && errors.city && (
+              <ErrorMessage>{errors.city}</ErrorMessage>
+            )}
             {isCityDisabled && (
               <EditBtn
                 type="submit"
@@ -398,9 +399,6 @@ const UserDataItem = () => {
               </EditBtn>
             )}
           </InputWrapper>
-          {touched.city && errors.city && (
-            <ErrorMessage>{errors.city}</ErrorMessage>
-          )}
         </Form>
       </DataInputWrapp>
     </div>

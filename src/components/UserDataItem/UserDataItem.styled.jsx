@@ -1,15 +1,18 @@
 import styled from 'styled-components';
 import Flatpickr from 'react-flatpickr';
+
+// import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
 import Select from 'react-select';
 
-import 'flatpickr/dist/themes/material_orange.css';
 import { theme } from 'globalStyles/theme';
 import { ReactComponent as EditPenIcon } from '../../images/svg/pensil.svg';
 import { ReactComponent as EditSaveIcon } from '../../images/svg/save.svg';
 
 export const SelectInput = styled(Select)`
   width: 150px;
-  padding: 4px 14px;
+  padding: 3px 12px 4px 12px;
 
   font-size: ${p => p.theme.fontSizes[0]};
   font-weight: ${p => p.theme.fontWeights.normal};
@@ -69,24 +72,6 @@ export const Label = styled.label`
   }
 `;
 
-export const LabelFlatpickr = styled.label`
-  display: inline-block;
-  font-weight: ${prop => prop.theme.fontWeights.normal};
-  font-size: 12px;
-  color: ${prop => prop.theme.colors.black};
-  line-height: 1.39;
-  width: 90px;
-  min-width: 60px;
-
-  @media (min-width: ${p => p.theme.breakpoints[1]}) {
-    width: 119px;
-    font-size: 18px;
-  }
-  @media (min-width: ${p => p.theme.breakpoints[2]}) {
-    width: 96px;
-  }
-`;
-
 export const Input = styled.input`
   width: 150px;
   padding: 4px 14px;
@@ -128,10 +113,27 @@ export const InputFlatpickrWrapp = styled.div`
     width: 100%;
   }
 `;
+export const LabelFlatpickr = styled.label`
+  display: inline-block;
+  font-weight: ${prop => prop.theme.fontWeights.normal};
+  font-size: 12px;
+  color: ${prop => prop.theme.colors.black};
+  line-height: 1.39;
+  width: 90px;
+  min-width: 60px;
+
+  @media (min-width: ${p => p.theme.breakpoints[1]}) {
+    width: 119px;
+    font-size: 18px;
+  }
+  @media (min-width: ${p => p.theme.breakpoints[2]}) {
+    width: 96px;
+  }
+`;
 
 export const FlatpickrStyled = styled(Flatpickr)`
   width: 100%;
-  padding: 4px 14px;
+  padding: 3px 12px 4px 12px;
   border: ${({ theme, disabled }) =>
     disabled ? theme.borders.transparent : theme.borders.input};
   border-radius: ${p => p.theme.radii.big};
