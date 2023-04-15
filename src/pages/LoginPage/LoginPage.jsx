@@ -105,7 +105,7 @@ export const LoginPage = () => {
                   </Div>
                   <Button type="submit">{t('Login')}</Button>
 
-                  <GoogleLoginButton href="https://petly-backend-ee1t.onrender.com/api/users/google">
+                  <GoogleLoginButton href="https://petly-backend-flax.vercel.app/api/users/google">
                     {/* <GoogleLoginButton href="https://petly-gd7x.onrender.com/api/users/google"> */}
                     <GoogleImg src={GooglePic} alt="Google" />
                     {t('Login_with_Google')}
