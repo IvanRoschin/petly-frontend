@@ -7,7 +7,10 @@ import i18n from 'i18n';
 import { useTranslation } from 'react-i18next';
 
 import { commonRoutes } from 'api/baseSettings';
-import { getRegionsOfCities } from 'helpers/getRegionsOfCities';
+import {
+  getRegionsOfCities,
+  getRegionsOfCitiesUA,
+} from 'helpers/getRegionsOfCities';
 
 import { Error, Button } from 'pages/authFormStyle.styled';
 import CustomField from 'pages/authFormStyle.styled';
@@ -15,6 +18,11 @@ import css from './PhoneInput.css';
 
 const StepTwo = props => {
   const { t } = useTranslation();
+  const language = localStorage.getItem('i18nextLng');
+  let lang = 'en';
+  if (language === 'uk' || language.includes('uk')) {
+    lang = 'uk';
+  }
 
   const [cityValue, setCityValue] = useState(null);
   const [results, setResults] = useState([]);
@@ -30,15 +38,16 @@ const StepTwo = props => {
       if (cityValue < 3) {
         return;
       }
-
       try {
         setIsLoading(true);
-
         const { data } = await commonRoutes.get(
-          `api/cities?query=${cityValue}`
+          `api/cities?query=${cityValue}&lang=${lang}`
         );
-        setResults(getRegionsOfCities(data));
-
+        if (lang === 'en') {
+          setResults(getRegionsOfCities(data));
+        } else {
+          setResults(getRegionsOfCitiesUA(data));
+        }
         setIsLoading(false);
       } catch (error) {
         toast.error(i18n.t('Try_again'));
@@ -46,7 +55,7 @@ const StepTwo = props => {
     }
 
     getCities();
-  }, [cityValue]);
+  }, [cityValue, lang]);
 
   return (
     <>

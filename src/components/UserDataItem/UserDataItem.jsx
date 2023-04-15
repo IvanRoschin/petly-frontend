@@ -253,7 +253,7 @@ const UserDataItem = () => {
 
                 data-enable-time
                 name="birthDate"
-                value={values.birthDate}
+                value={values?.birthDate}
                 placeholder={getFormatedDate(user)}
                 disabled={isBirthdayDisabled}
                 options={{
