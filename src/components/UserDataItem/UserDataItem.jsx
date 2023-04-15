@@ -4,7 +4,10 @@ import css from './UserPhoneInput.css';
 import React, { useState, useEffect, useCallback } from 'react';
 import toast from 'react-hot-toast';
 import i18n from 'i18n';
-import { getRegionsOfCities } from 'helpers/getRegionsOfCities';
+import {
+  getRegionsOfCities,
+  getRegionsOfCitiesUA,
+} from 'helpers/getRegionsOfCities';
 import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 
@@ -31,7 +34,7 @@ import {
   SelectInput,
 } from './UserDataItem.styled';
 import { updateInfo } from '../../redux/auth/operations';
-
+// import { detectLanguage } from 'helpers/detectLanguage';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from 'hooks';
 import { commonRoutes } from 'api/baseSettings';
@@ -39,9 +42,13 @@ import { commonRoutes } from 'api/baseSettings';
 const UserDataItem = () => {
   const language = localStorage.getItem('i18nextLng');
   let locale = English;
+  let lang = 'en';
   if (language === 'uk' || language.includes('uk')) {
     locale = Ukrainian;
+    lang = 'uk';
   }
+  // const lang = detectLanguage();
+  // console.log('lang', lang);
 
   const { t } = useTranslation();
   const { user } = useAuth();
@@ -87,21 +94,6 @@ const UserDataItem = () => {
       isCityDisabled,
     ]
   );
-  const options = results.map(
-    ({ _id, useCounty, stateEn, cityEn, countyEn }) => {
-      if (Number(useCounty)) {
-        return {
-          value: _id,
-          label: `${cityEn}, ${countyEn}, ${stateEn} region`,
-        };
-      } else {
-        return {
-          value: _id,
-          label: `${cityEn}, ${stateEn} region`,
-        };
-      }
-    }
-  );
 
   const handleOnInputChange = value => {
     if (value.length >= 3) {
@@ -116,9 +108,13 @@ const UserDataItem = () => {
       try {
         setIsLoading(true);
         const { data } = await commonRoutes.get(
-          `api/cities?query=${cityValue}`
+          `api/cities?query=${cityValue}&lang=${lang}`
         );
-        setResults(getRegionsOfCities(data));
+        if (lang === 'en') {
+          setResults(getRegionsOfCities(data));
+        } else {
+          setResults(getRegionsOfCitiesUA(data));
+        }
         setIsLoading(false);
       } catch (error) {
         toast.error(i18n.t('Try_again'));
@@ -126,7 +122,7 @@ const UserDataItem = () => {
     }
 
     getCities();
-  }, [cityValue]);
+  }, [cityValue, lang]);
 
   const {
     values,
@@ -350,7 +346,7 @@ const UserDataItem = () => {
             <Label>{t('City')}:</Label>
             <SelectInput
               onInputChange={handleOnInputChange}
-              options={options}
+              options={results}
               onChange={cityValue => {
                 console.log('cityValue', cityValue);
                 setFieldValue('city', cityValue.label);

@@ -200,12 +200,3 @@ export const ErrorMessage = styled.div`
     margin-left: ${prop => (prop.isDateEdit ? '10px' : 0)};
   }
 `;
-
-export const NotAuthorized = styled.div`
-  font-family: 'Manrope';
-  font-size: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 40%;
-`;
