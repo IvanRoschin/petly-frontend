@@ -100,6 +100,7 @@ const UserDataItem = () => {
       setCityValue(value);
     }
   };
+
   useEffect(() => {
     async function getCities() {
       if (cityValue < 3) {
@@ -143,6 +144,7 @@ const UserDataItem = () => {
     validationSchema: userUpdateSchema,
 
     onSubmit: values => {
+      console.log('values', values);
       dispatch(updateInfo(values));
     },
   });
@@ -349,10 +351,14 @@ const UserDataItem = () => {
               options={results}
               onChange={cityValue => {
                 console.log('cityValue', cityValue);
-                setFieldValue('city', cityValue.label);
+                setFieldValue('city', cityValue);
               }}
               isSearchable="true"
-              placeholder={user?.city}
+              placeholder={
+                lang === 'uk'
+                  ? `${user?.city?.city} ${user?.city?.state} ${`область`}`
+                  : `${user?.city?.cityEn} ${user?.city?.stateEn} ${`region`}`
+              }
               isLoading={isLoading}
               isDisabled={isCityDisabled}
               styles={{

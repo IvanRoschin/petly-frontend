@@ -58,6 +58,22 @@ export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
 });
 
 /*
+ * POST @ /users/delete
+ * headers: Authorization: Bearer token
+ */
+export const deleteUser = createAsyncThunk(
+  'auth/delete',
+  async (_, thunkAPI) => {
+    try {
+      await privateRoutes.get('api/users/delete');
+      // After a successful logout, remove the token from the HTTP header
+      token.unset();
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+/*
  * GET @ /users/current
  * headers: Authorization: Bearer token
  *

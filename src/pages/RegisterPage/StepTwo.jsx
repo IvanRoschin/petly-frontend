@@ -69,7 +69,6 @@ const StepTwo = props => {
         required
       />
       <Error name="name" component="div" />
-
       <Select
         onInputChange={handleOnInputChange}
         options={results}
@@ -93,7 +92,6 @@ const StepTwo = props => {
         }}
       />
       <Error name="city" component="div" />
-
       <PhoneInput
         name="phone"
         type="tel"
@@ -114,7 +112,6 @@ const StepTwo = props => {
           }
         }}
       />
-
       {/* <CustomField
         type="text"
         name="city"
@@ -125,7 +122,6 @@ const StepTwo = props => {
         required
       />
       <Error name="city" component="div" /> */}
-
       {/* <CustomField
         type="tel"
         name="phone"
@@ -136,7 +132,6 @@ const StepTwo = props => {
         required
       /> */}
       {/* <Error name="phone" component="div" /> */}
-
       <Button type="submit">{t('Register')}</Button>
       <Button type="button" onClick={props.back}>
         {t('Back')}

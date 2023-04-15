@@ -13,7 +13,9 @@ import {
 } from './UserData.styled';
 import UserDataItem from 'components/UserDataItem';
 import Logout from 'components/Logout';
+import DeleteUser from 'components/DeleteUser';
 import { useTranslation } from 'react-i18next';
+import { Box } from 'components/Box/Box';
 
 export const UserData = () => {
   const [showModal, setShowModal] = useState(false);
@@ -37,8 +39,11 @@ export const UserData = () => {
             <UserDataList>
               <UserDataItem />
             </UserDataList>
-
-            <Logout onOpen={toggleModal} />
+            <Box display="flex" justifyContent="space-between" gridGap="24px">
+              <Logout onOpen={toggleModal} />
+              <DeleteUser onOpen={toggleModal} />
+            </Box>
+            ;
           </UserThumb>
         </UserSection>
       </UserContainer>
