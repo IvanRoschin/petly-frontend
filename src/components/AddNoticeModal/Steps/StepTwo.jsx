@@ -3,6 +3,15 @@ import { Formik } from 'formik';
 import { stepTwoSchema } from 'helpers/validationSchemas/addNotice';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'components/Box/Box';
+import { useState, useEffect } from 'react';
+import toast from 'react-hot-toast';
+import i18n from 'i18n';
+import Select from 'react-select';
+import { commonRoutes } from 'api/baseSettings';
+import {
+  getRegionsOfCities,
+  getRegionsOfCitiesUA,
+} from 'helpers/getRegionsOfCities';
 
 import { PreviewContainer, RemoveImgBtn, PreviewImg } from './Steps.styled';
 import {
@@ -35,6 +44,45 @@ const StepTwo = props => {
     props.next(values, true);
   };
 
+  const language = localStorage.getItem('i18nextLng');
+  let lang = 'en';
+  if (language === 'uk' || language.includes('uk')) {
+    lang = 'uk';
+  }
+
+  const [cityValue, setCityValue] = useState(null);
+  const [results, setResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const handleOnInputChange = value => {
+    if (value.length >= 3) {
+      setCityValue(value);
+    }
+  };
+
+  useEffect(() => {
+    async function getCities() {
+      if (cityValue < 3) {
+        return;
+      }
+      try {
+        setIsLoading(true);
+        const { data } = await commonRoutes.get(
+          `api/cities?query=${cityValue}&lang=${lang}`
+        );
+        if (lang === 'en') {
+          setResults(getRegionsOfCities(data));
+        } else {
+          setResults(getRegionsOfCitiesUA(data));
+        }
+        setIsLoading(false);
+      } catch (error) {
+        toast.error(i18n.t('Try_again'));
+      }
+    }
+
+    getCities();
+  }, [cityValue, lang]);
+
   return (
     <Formik
       validationSchema={stepTwoSchema}
@@ -58,12 +106,39 @@ const StepTwo = props => {
               <InputRadio type="radio" name="sex" value="female" />
             </SexLabel>
           </SexFormBox>
+          <Select
+            onInputChange={handleOnInputChange}
+            name="location"
+            options={results}
+            onChange={(location, _, e) => {
+              console.log('location', location);
+              setFieldValue('location', location);
+            }}
+            placeholder={t('City_region')}
+            isSearchable="true"
+            isLoading={isLoading}
+            noOptionsMessage={({ inputValue }) =>
+              !inputValue ? t('City_letters') : t('City_notfound')
+            }
+            styles={{
+              control: (baseStyles, state) => ({
+                // ...baseStyles,
+                display: 'flex',
+                padding: '4px',
+                border: '1px solid #F59256',
+                borderRadius: '20px',
+                backgroundColor: '#FDF7F2',
+                borderColor: state.isSelected ? '#3CBC81' : '#F59256',
+              }),
+            }}
+          />
+          <ErrorStyle name="location" component="div" />
 
-          <InputCont>
+          {/* <InputCont>
             <TextLabel htmlFor="location">{t('Location')}:</TextLabel>
             <TextInput name="location" placeholder={t('Type_pet_location')} />
             <ErrorStyle name="location" component="div" />
-          </InputCont>
+          </InputCont> */}
 
           {props.data.category === 'sell' && (
             <InputCont>

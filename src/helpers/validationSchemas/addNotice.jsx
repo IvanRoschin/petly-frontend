@@ -25,7 +25,7 @@ export const stepOneSchema = Yup.object({
 
 export const stepTwoSchema = Yup.object({
   sex: Yup.string().required(i18n.t('Choose_sex')),
-  location: Yup.string().required(i18n.t('Type_location')),
+  location: Yup.object().required(i18n.t('Type_location')),
   price: Yup.number(i18n.t('only_numbers'))
     .positive()
     .truncate()

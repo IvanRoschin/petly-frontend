@@ -265,7 +265,7 @@ const UserDataItem = () => {
                   locale: locale,
                 }}
                 onChange={date => {
-                  setFieldValue('birthDate', date[0]);
+                  setFieldValue('birthDate', date[0].toLocaleDateString());
                 }}
               />
             </InputFlatpickrWrapp>

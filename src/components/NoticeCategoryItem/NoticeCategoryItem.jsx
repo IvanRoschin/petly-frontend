@@ -40,6 +40,12 @@ export const NoticeCategoryItem = ({ notice, deleteCard, categName }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [isOwn, setIsOwn] = useState(false);
 
+  const language = localStorage.getItem('i18nextLng');
+  let lang = 'en';
+  if (language === 'uk' || language.includes('uk')) {
+    lang = 'uk';
+  }
+
   const { favoriteNotices, ownNotices } = useNotices();
 
   const {
@@ -141,7 +147,11 @@ export const NoticeCategoryItem = ({ notice, deleteCard, categName }) => {
                 </Record>
                 <Record>
                   <RecordName>{t('Place')}:</RecordName>
-                  <RecordContent>{location}</RecordContent>
+                  <RecordContent>
+                    {lang === 'uk'
+                      ? `${location.city} ${location.state} ${`область`}`
+                      : `${location.cityEn} ${location.stateEn} ${`region`}`}
+                  </RecordContent>
                 </Record>
                 <Record>
                   <RecordName>{t('Age')}:</RecordName>

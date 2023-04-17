@@ -28,7 +28,7 @@ export const registerValidationSchemaTwo = Yup.object().shape({
     )
     .required(i18n.t('required_field')),
 
-  // city: Yup.object(),
+  city: Yup.object().required(i18n.t('Type_location')),
   // .matches(
   //   /^[a-zA-Zа-яА-ЯіІїЇґҐ]+(?:[-\s]?[a-zA-Zа-яА-ЯіІїЇґҐ]+)*,\s*[a-zA-Zа-яА-ЯіІїЇґҐ'’\s-]+$/,
   //   i18n.t('Should_City')

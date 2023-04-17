@@ -44,24 +44,39 @@ const AddNoticeModal = ({ handleButtonToggle }) => {
       const formattedDate = new Date(
         newData.birthDate.split('.').reverse().join('-')
       );
+      const payload = {
+        category: newData.category,
+        title: newData.title,
+        name: newData.name,
+        birthDate: formattedDate,
+        breed: newData.breed,
+        sex: newData.sex,
+        location: newData.location,
+        comments: newData.comments,
+        photoURL: newData.photoURL,
+        price: newData.price || 0.01,
+      };
 
-      const formData = new FormData();
-      formData.append('category', newData.category);
-      formData.append('title', newData.title);
-      formData.append('name', newData.name);
-      formData.append('birthDate', formattedDate);
-      formData.append('breed', newData.breed);
-      formData.append('sex', newData.sex);
-      formData.append('location', newData.location);
-      formData.append('comments', newData.comments);
-      formData.append('photoURL', newData.photoURL);
-      if (newData.price) {
-        formData.append('price', newData.price);
-      } else {
-        formData.append('price', 0.01);
-      }
+      const res = await addUserNotice(payload);
 
-      const res = await addUserNotice(formData);
+      // const formData = new FormData();
+      // formData.append('category', newData.category);
+      // formData.append('title', newData.title);
+      // formData.append('name', newData.name);
+      // formData.append('birthDate', formattedDate);
+      // formData.append('breed', newData.breed);
+      // formData.append('sex', newData.sex);
+      // formData.append('location', newData.location);
+      // console.log('location', newData.location);
+      // formData.append('comments', newData.comments);
+      // formData.append('photoURL', newData.photoURL);
+      // if (newData.price) {
+      //   formData.append('price', newData.price);
+      // } else {
+      //   formData.append('price', 0.01);
+      // }
+
+      // const res = await addUserNotice(formData);
 
       if (res.status === 201) {
         navigate('/notices/own');

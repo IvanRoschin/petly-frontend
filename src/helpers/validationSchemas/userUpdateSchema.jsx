@@ -21,5 +21,5 @@ export const userUpdateSchema = yup.object().shape({
     .string()
     .matches(/^\+380\d{9}$/, i18n.t('Invalid_phone_number'))
     .required(i18n.t('Phone_required')),
-  city: yup.object(),
+  city: yup.object().required(i18n.t('Type_location')),
 });
