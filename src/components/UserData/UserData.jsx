@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import UserPhoto from 'components/UserData/UserPhoto';
 import Modal from 'components/Modal';
-import UserModal from './UserModal';
+import { UserModal, UserDeleteModal } from './UserModal';
 import {
   UserWrapper,
   TitleContainer,
@@ -19,6 +19,9 @@ import { Box } from 'components/Box/Box';
 
 export const UserData = () => {
   const [showModal, setShowModal] = useState(false);
+  const [isUserModalOpen, toggleUserModal] = useState(false);
+  const [isDeleteUserModalOpen, toggleDeleteUserModal] = useState(false);
+
   const { t } = useTranslation();
 
   const toggleModal = () => {
@@ -40,18 +43,29 @@ export const UserData = () => {
               <UserDataItem />
             </UserDataList>
             <Box display="flex" justifyContent="space-between" gridGap="24px">
-              <Logout onOpen={toggleModal} />
-              <DeleteUser onOpen={toggleModal} />
+              <Logout onOpen={() => toggleUserModal(true)} />
+              {isUserModalOpen ? (
+                <Modal onClose={toggleModal}>
+                  <UserModal onClose={() => toggleUserModal(false)} />
+                </Modal>
+              ) : null}
+              <DeleteUser onOpen={() => toggleDeleteUserModal(true)} />
+              {isDeleteUserModalOpen ? (
+                <Modal onClose={toggleModal}>
+                  <UserDeleteModal
+                    onClose={() => toggleDeleteUserModal(false)}
+                  />
+                </Modal>
+              ) : null}
             </Box>
-            ;
           </UserThumb>
         </UserSection>
       </UserContainer>
-      {showModal ? (
+      {/* {showModal ? (
         <Modal onClose={toggleModal}>
           <UserModal onClose={toggleModal} />
         </Modal>
-      ) : null}
+      ) : null} */}
     </UserWrapper>
   );
 };

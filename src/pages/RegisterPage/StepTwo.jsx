@@ -72,7 +72,7 @@ const StepTwo = props => {
       <Select
         onInputChange={handleOnInputChange}
         options={results}
-        onChange={selection => props.forCity(selection.value)}
+        onChange={selection => props.forCity(selection)}
         placeholder={t('City_region')}
         isSearchable="true"
         isLoading={isLoading}

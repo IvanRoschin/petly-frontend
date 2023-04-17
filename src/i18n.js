@@ -158,6 +158,8 @@ i18n
           Phone_required: 'Phone is required',
           City_required: 'Please choose your city',
           Want_leave: 'Do you really want to leave?',
+          Want_delete: 'Do you really want to delete user?',
+
           Yes: 'Yes',
           No: 'No',
           Type_pet_price: 'Type pet price',
@@ -305,6 +307,7 @@ i18n
           Phone_required: `Номер телефону обов'язковий`,
           City_required: `Будь ласка, оберіть своє місто`,
           Want_leave: 'Ви дійсно бажаєте вийти?',
+          Want_delete: 'Ви дійсно бажаєте видалити користувача?',
           Yes: 'Так',
           No: 'Ні',
           Type_pet_price: 'Введіть ціну для тваринки',

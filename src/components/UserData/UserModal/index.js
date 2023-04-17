@@ -1,1 +1,1 @@
-export { default } from './UserModal';
+export { UserModal, UserDeleteModal } from './UserModal';

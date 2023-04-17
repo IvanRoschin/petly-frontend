@@ -3,6 +3,7 @@ import {
   signup,
   logIn,
   logOut,
+  deleteUser,
   refreshUser,
   updateAvatar,
   updateInfo,
@@ -86,6 +87,25 @@ const authSlice = createSlice({
       state.isRefreshing = false;
       state.error = false;
     },
+    [deleteUser.fulfilled](state) {
+      state.user = {
+        _id: null,
+        name: null,
+        email: null,
+        phone: null,
+        birthDate: null,
+        city: null,
+        avatarURL: null,
+        myPets: [],
+        favorites: [],
+      };
+      state.accessToken = null;
+      state.refreshToken = null;
+
+      state.isLoggedIn = false;
+      state.isRefreshing = false;
+      state.error = false;
+    },
     [refreshUser.fulfilled](state, action) {
       state.user = action.payload;
 
@@ -126,6 +146,7 @@ const authSlice = createSlice({
     [signup.pending]: handlePending,
     [logIn.pending]: handlePending,
     [logOut.pending]: handlePending,
+    [deleteUser.pending]: handlePending,
     [refreshUser.pending]: handlePending,
     [updateAvatar.pending]: handlePending,
     [updateInfo.pending]: handlePending,
