@@ -118,6 +118,11 @@ export const LoginPage = () => {
               question={t('No_account')}
               pageName={t('Register')}
             />
+            <RouteFormLoginRegister
+              link="/restore"
+              question={t('Password recovery')}
+              pageName={t('restore')}
+            />
           </BoxAuth>
         </Container>
       </LogoBg>

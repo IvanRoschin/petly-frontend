@@ -9,6 +9,7 @@ import LoadingWindow from './LoadingWindow';
 import { ROUTES } from 'constants/routes';
 import { RestrictedRoute } from './Routes/RestrictedRoute';
 import { PrivateRoute } from './Routes/PrivateRoute';
+import PasswordRecoveryForm from './PasswordRecovery';
 import SharedLayout from 'components/SharedLayout';
 import NoticesCategoriesList from './NoticesCategoriesList';
 
@@ -66,6 +67,9 @@ export const App = () => {
               <RestrictedRoute redirectTo="/user" component={<LoginPage />} />
             }
           />
+
+          <Route path={ROUTES.restore} element={<PasswordRecoveryForm />} />
+
           <Route
             path={ROUTES.user}
             element={

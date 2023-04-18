@@ -6,6 +6,7 @@ export const ROUTES = {
   register: 'register',
   login: 'login',
   user: 'user',
+  restore: 'restore',
 };
 
 export const ROUTES_PARAMS = {
