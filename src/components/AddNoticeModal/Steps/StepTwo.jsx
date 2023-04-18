@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { Formik } from 'formik';
-import { stepTwoSchema } from 'helpers/validationSchemas/addNotice';
+import { stepTwoSchema } from 'helpers/validationSchemas/noticeAddSchema';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'components/Box/Box';
 import { useState, useEffect } from 'react';

@@ -8,6 +8,7 @@ import {
   updateAvatar,
   updateInfo,
   addPet,
+  editPet,
   removePet,
 } from './operations';
 
@@ -134,6 +135,13 @@ const authSlice = createSlice({
       state.isRefreshing = false;
       state.error = false;
     },
+    [editPet.fulfilled](state, action) {
+      state.user.myPets.findIndex(pet => pet._id === action.payload._id);
+      state.user.myPets = { ...action.payload };
+
+      state.isRefreshing = false;
+      state.error = false;
+    },
     [removePet.fulfilled](state, action) {
       const index = state.user.myPets.findIndex(
         pet => pet._id === action.payload._id
@@ -159,6 +167,7 @@ const authSlice = createSlice({
     [updateAvatar.rejected]: handleRejected,
     [updateInfo.rejected]: handleRejected,
     [addPet.rejected]: handleRejected,
+    [editPet.rejected]: handleRejected,
     [removePet.rejected]: handleRejected,
   },
 });

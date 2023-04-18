@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import toast from 'react-hot-toast';
 
-import schema from 'helpers/validationSchemas/loginSchema';
+import { userLoginSchema } from 'helpers/validationSchemas';
 import { logIn } from 'redux/auth/operations.js';
 
 import { Container } from 'globalStyles/globalStyle';
@@ -69,7 +69,7 @@ export const LoginPage = () => {
             <Formik
               initialValues={{ email: '', password: '' }}
               onSubmit={handleSubmit}
-              validationSchema={schema}
+              validationSchema={userLoginSchema}
             >
               {({ errors, touched, values }) => (
                 <FormCustom>

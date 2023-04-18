@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 import i18n from 'i18n';
 
-export const registerValidationSchemaOne = Yup.object().shape({
+export const userRegisterStepOneSchema = Yup.object().shape({
   email: Yup.string()
     .matches(
       // /^((([0-9A-Za-z]{1}[-0-9A-z.]{1,}[0-9A-Za-z]{1})))@([-A-Za-z]{1,}.){1,2}[-A-Za-z]{2,})$/,
@@ -20,7 +20,7 @@ export const registerValidationSchemaOne = Yup.object().shape({
     .required(i18n.t('required_field')),
 });
 
-export const registerValidationSchemaTwo = Yup.object().shape({
+export const userRegisterStepTwoSchema = Yup.object().shape({
   name: Yup.string()
     .matches(
       /^[a-zA-Zа-яА-ЯіІїЇґҐ]+(?: [a-zA-Zа-яА-ЯіІїЇґҐ]+)*$/,

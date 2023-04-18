@@ -122,6 +122,10 @@ export const refreshUser = createAsyncThunk(
   }
 );
 
+/*
+ * PUT @ /users/avatars
+ * headers: Authorization: Bearer token
+ */
 export const updateAvatar = createAsyncThunk(
   'auth/updateAvatar',
   async (avatar, thunkAPI) => {
@@ -138,6 +142,10 @@ export const updateAvatar = createAsyncThunk(
   }
 );
 
+/*
+ * PATCH @ /users/avatars
+ * headers: Authorization: Bearer token
+ */
 export const updateInfo = createAsyncThunk(
   'auth/updateUser',
   async (credentials, thunkAPI) => {
@@ -152,6 +160,11 @@ export const updateInfo = createAsyncThunk(
 
 // =========== PETS ===========
 
+/*
+ * POST @ /users/pets
+ * headers: Authorization: Bearer token
+ * body: { name, breed, photoURL, birthDate, comments, owner }
+ */
 export const addPet = createAsyncThunk(
   'auth/addPet',
   async (credentials, thunkAPI) => {
@@ -167,6 +180,33 @@ export const addPet = createAsyncThunk(
     }
   }
 );
+
+/*
+ * PATCH @ /users/pets
+ * headers: Authorization: Bearer token
+ * body: { name, breed, photoURL, birthDate, comments, owner }
+ */
+export const editPet = createAsyncThunk(
+  'auth/editPet',
+  async (petId, thunkAPI) => {
+    try {
+      const { data } = await privateRoutes.patch(`api/pets/${petId}`, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+/*
+ * DELETE @ /users/pets
+ * headers: Authorization: Bearer token
+ * body: { petID }
+ */
 
 export const removePet = createAsyncThunk(
   'auth/removePet',
