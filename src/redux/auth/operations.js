@@ -188,13 +188,17 @@ export const addPet = createAsyncThunk(
  */
 export const editPet = createAsyncThunk(
   'auth/editPet',
-  async (petId, thunkAPI) => {
+  async (petId, credentials, thunkAPI) => {
     try {
-      const { data } = await privateRoutes.patch(`api/pets/${petId}`, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      const { data } = await privateRoutes.patch(
+        `api/pets/${petId}`,
+        credentials,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);

@@ -36,7 +36,6 @@ import {
 } from './UserDataItem.styled';
 export const PetCard = ({ pet }) => {
   const { t } = useTranslation();
-  // const { pet } = useAuth();
 
   const dispatch = useDispatch();
 
@@ -103,7 +102,7 @@ export const PetCard = ({ pet }) => {
     validationSchema: validationOne,
     onSubmit: values => {
       console.log('values', values);
-      dispatch(editPet(values));
+      dispatch(editPet(_id, values));
     },
   });
 
