@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import 'flatpickr/dist/themes/material_orange.css';
-import { validationOne, validationTwo } from '../../helpers/validationSchemas';
+import { validationOne } from '../../helpers/validationSchemas';
 import { useTranslation } from 'react-i18next';
 // import { useAuth } from 'hooks';
 import { removePet, editPet } from 'redux/auth/operations';
@@ -14,8 +14,8 @@ import { Box } from 'components/Box/Box';
 import {
   CardWrapper,
   Image,
-  PetInfo,
-  PetTitle,
+  //   PetInfo,
+  //   PetTitle,
   BtnDelete,
   DeleteIcon,
 } from './PetCard.styled';
@@ -39,9 +39,11 @@ export const PetCard = ({ pet }) => {
 
   const dispatch = useDispatch();
 
-  const { _id, name, birthDate, breed, photoURL, comments } = pet;
-  const birthDateToObject = new Date(birthDate);
-  const stringifiedToDate = birthDateToObject.toLocaleDateString('ua');
+  // const { _id, name, birthDate, breed, photoURL, comments } = pet;
+  const { _id, photoURL } = pet;
+
+  //   const birthDateToObject = new Date(birthDate);
+  //   const stringifiedToDate = birthDateToObject.toLocaleDateString('ua');
   const iconColorDisabled = 'rgba(0,0,0,0.6)';
 
   const [isNameDisabled, setIsNameDisabled] = useState(true);
@@ -49,7 +51,7 @@ export const PetCard = ({ pet }) => {
   const [isBreedDisabled, setIsBreedDisabled] = useState(true);
   const [isCommentsDisabled, setIsCommentsDisabled] = useState(true);
   const [isImageDisabled, setIsImageDisabled] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
+  //   const [isLoading, setIsLoading] = useState(false);
 
   const isAnyEditing =
     !isNameDisabled ||
@@ -290,5 +292,3 @@ export const PetCard = ({ pet }) => {
     </CardWrapper>
   );
 };
-
-export default PetCard;

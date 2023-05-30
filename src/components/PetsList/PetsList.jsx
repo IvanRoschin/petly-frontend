@@ -3,7 +3,7 @@ import { selectUser } from 'redux/auth/selectors';
 import emptyPets from 'images/emptyPets.jpg';
 
 import { List, Items, Img, ImgContainer } from './PetsList.styled';
-import PetCard from '../PetCard';
+import { PetCard } from '../PetCard';
 
 export const PetsList = () => {
   const pets = useSelector(selectUser).myPets;
