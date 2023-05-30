@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { Formik, Form } from 'formik';
 import { Box } from 'components/Box/Box';
 import { useTranslation } from 'react-i18next';
-import { validationTwo } from 'helpers/validationSchemas/validationPetSchema';
+import { validationTwo } from 'helpers/validationSchemas/petAddSchema.jsx';
 import {
   ButtonBox,
   Button,

@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 import i18n from 'i18n';
 
-const schema = yup.object().shape({
+export const userLoginSchema = yup.object().shape({
   email: yup
     .string()
     .min(12, i18n.t('at_least_twelve'))
@@ -18,5 +18,3 @@ const schema = yup.object().shape({
     .matches(/^\S+$/, i18n.t('Password_contain'))
     .required(i18n.t('Password_required')),
 });
-
-export default schema;

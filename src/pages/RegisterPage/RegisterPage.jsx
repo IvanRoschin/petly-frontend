@@ -12,9 +12,9 @@ import { Container } from 'globalStyles/globalStyle';
 import { Box } from 'components/Box/Box';
 
 import {
-  registerValidationSchemaOne,
-  registerValidationSchemaTwo,
-} from 'helpers/validationSchemas/RegisterValidationSchema';
+  userRegisterStepOneSchema,
+  userRegisterStepTwoSchema,
+} from 'helpers/validationSchemas';
 
 import StepOne from './StepOne';
 import StepTwo from './StepTwo';
@@ -95,8 +95,8 @@ export const RegisterPage = () => {
               onSubmit={handleSubmit}
               validationSchema={
                 currentStep === 0
-                  ? registerValidationSchemaOne
-                  : registerValidationSchemaTwo
+                  ? userRegisterStepOneSchema
+                  : userRegisterStepTwoSchema
               }
             >
               {({ errors, touched, isValid, setFieldValue, values }) => (

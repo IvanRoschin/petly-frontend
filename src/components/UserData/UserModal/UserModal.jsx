@@ -20,7 +20,6 @@ export const UserModal = ({ onClose }) => {
   return (
     <Box p="32px 16px" textAlign="center">
       <ModalText>🐾 {t('Want_leave')}</ModalText>
-
       <Box display="flex" justifyContent="center" gridGap="24px">
         <ModalButton type="button" onClick={onClose}>
           {t('No')}

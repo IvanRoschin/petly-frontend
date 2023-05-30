@@ -1,6 +1,6 @@
 import { Formik, Form } from 'formik';
 import { useTranslation } from 'react-i18next';
-import { validationOne } from 'helpers/validationSchemas/validationPetSchema';
+import { validationOne } from 'helpers/validationSchemas/petAddSchema.jsx';
 import { Box } from 'components/Box/Box';
 
 import { Ukrainian } from 'flatpickr/dist/l10n/uk.js';

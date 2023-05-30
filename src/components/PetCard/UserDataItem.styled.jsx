@@ -2,10 +2,11 @@ import styled from 'styled-components';
 import Flatpickr from 'react-flatpickr';
 
 // import DatePicker from 'react-datepicker';
-// import 'react-datepicker/dist/react-datepicker.css';
+import 'react-datepicker/dist/react-datepicker.css';
 
 import Select from 'react-select';
 
+import { theme } from 'globalStyles/theme';
 import { ReactComponent as EditPenIcon } from '../../images/svg/pensil.svg';
 import { ReactComponent as EditSaveIcon } from '../../images/svg/save.svg';
 
@@ -25,12 +26,12 @@ export const SelectInput = styled(Select)`
   @media (min-width: ${p => p.theme.breakpoints[1]}) {
     width: 100%;
     padding: 3px 12px 4px 12px;
-    font-size: ${p => p.theme.fontSizes[3]};
+    font-size: ${theme.fontSizes[3]};
   }
   @media (min-width: ${p => p.theme.breakpoints[2]}) {
     width: 100%;
     padding: 3px 12px 4px 12px;
-    font-size: $ ${p => p.theme.fontSizes[3]};
+    font-size: ${theme.fontSizes[3]};
   }
 `;
 
@@ -93,12 +94,12 @@ export const Input = styled.input`
   @media (min-width: ${p => p.theme.breakpoints[1]}) {
     width: 100%;
     padding: 3px 12px 4px 12px;
-    font-size: ${p => p.theme.fontSizes[3]};
+    font-size: ${theme.fontSizes[3]};
   }
   @media (min-width: ${p => p.theme.breakpoints[2]}) {
     width: 100%;
     padding: 3px 12px 4px 12px;
-    font-size: ${p => p.theme.fontSizes[3]};
+    font-size: ${theme.fontSizes[3]};
   }
 `;
 
@@ -151,7 +152,7 @@ export const FlatpickrStyled = styled(Flatpickr)`
 
   @media (min-width: ${p => p.theme.breakpoints[1]}) {
     padding: 3px 12px 4px 12px;
-    font-size: ${p => p.theme.fontSizes[3]};
+    font-size: ${theme.fontSizes[3]};
   }
 `;
 

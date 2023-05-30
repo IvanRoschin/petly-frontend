@@ -1,6 +1,6 @@
 import { Formik } from 'formik';
 
-import { stepOneSchema } from 'helpers/validationSchemas/addNotice';
+import { stepOneSchema } from 'helpers/validationSchemas/noticeAddSchema';
 import { TextField } from 'helpers/addNoticeCustomField/noticeInput';
 import {
   ActionButton,
