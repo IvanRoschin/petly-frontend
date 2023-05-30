@@ -1,6 +1,6 @@
 // const HOST_URL = 'https://petly-gd7x.onrender.com';
 // const HOST_URL = 'https://petly-backend-ee1t.onrender.com';
-const HOST_URL = 'https://petly-backend-flax.vercel.app';
+const HOST_URL = 'https://petly-backend-chi.vercel.app';
 
 const LOCALHOST_URL = 'http://localhost:3030';
 
