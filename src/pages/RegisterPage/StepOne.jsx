@@ -76,7 +76,7 @@ export const StepOne = props => {
       <Button type="button" onClick={props.next} disabled={props.isValid}>
         {t('Next')}
       </Button>
-      <GoogleLoginButton href="hhttps://petly-backend-chi.vercel.app/api/users/google">
+      <GoogleLoginButton href="https://petly-backend-chi.vercel.app/api/users/google">
         <GoogleImg src={GooglePic} alt="Google" />
         {t('Signup_with_Google')}
       </GoogleLoginButton>
