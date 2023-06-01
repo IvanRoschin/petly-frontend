@@ -144,7 +144,6 @@ const UserDataItem = () => {
     validationSchema: userUpdateSchema,
 
     onSubmit: values => {
-      console.log('values', values);
       dispatch(updateInfo(values));
     },
   });

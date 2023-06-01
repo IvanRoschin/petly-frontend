@@ -1,6 +1,19 @@
 import styled from 'styled-components';
 import { ReactComponent as Icon } from 'images/svg/trash.svg';
 
+export const HiddenInput = styled.input`
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  margin: -1px;
+`;
+
 export const CardWrapper = styled.div`
   padding-top: ${p => p.theme.space[0]}px;
   padding-left: ${p => p.theme.space[4] + 4}px;
@@ -72,6 +85,7 @@ export const PetTitle = styled.span`
 
 export const BtnDelete = styled.button`
   position: absolute;
+
   top: ${p => p.theme.space[4] + 4}px;
   // right: ${p => p.theme.space[0]}px;
   left: 215px;
@@ -91,10 +105,12 @@ export const BtnDelete = styled.button`
   }
 
   @media (min-width: ${p => p.theme.breakpoints[1]}) {
-    width: ${p => p.theme.space[5] + 12}px;
-    height: ${p => p.theme.space[5] + 12}px;
+    position: static;
+    width: ${p => p.theme.space[5]}px;
+    height: ${p => p.theme.space[5]}px;
+    margin-left: auto;
 
-    left: 427px;
+    left: 0;
 
     border-radius: ${p => p.theme.radii.circular};
     background-color: ${p => p.theme.colors.background};
@@ -106,5 +122,7 @@ export const BtnDelete = styled.button`
 `;
 
 export const DeleteIcon = styled(Icon)`
-  fill: currentColor;
+  width: 20px;
+  height: 20px;
+  fill: rgb(245, 146, 86);
 `;

@@ -11,14 +11,7 @@ import { getFormatedDate } from 'helpers/getFormatedDate';
 import { DEFAULT_IMAGE } from 'constants/urls';
 import { Box } from 'components/Box/Box';
 
-import {
-  CardWrapper,
-  Image,
-  //   PetInfo,
-  //   PetTitle,
-  BtnDelete,
-  DeleteIcon,
-} from './PetCard.styled';
+import { CardWrapper, Image, BtnDelete, DeleteIcon } from './PetCard.styled';
 
 import {
   DataInputWrapp,
@@ -39,11 +32,8 @@ export const PetCard = ({ pet }) => {
 
   const dispatch = useDispatch();
 
-  // const { _id, name, birthDate, breed, photoURL, comments } = pet;
-  const { _id, photoURL } = pet;
+  const { _id, name, birthDate, breed, photoURL, comments } = pet;
 
-  //   const birthDateToObject = new Date(birthDate);
-  //   const stringifiedToDate = birthDateToObject.toLocaleDateString('ua');
   const iconColorDisabled = 'rgba(0,0,0,0.6)';
 
   const [isNameDisabled, setIsNameDisabled] = useState(true);
@@ -51,7 +41,6 @@ export const PetCard = ({ pet }) => {
   const [isBreedDisabled, setIsBreedDisabled] = useState(true);
   const [isCommentsDisabled, setIsCommentsDisabled] = useState(true);
   const [isImageDisabled, setIsImageDisabled] = useState(true);
-  //   const [isLoading, setIsLoading] = useState(false);
 
   const isAnyEditing =
     !isNameDisabled ||
@@ -96,15 +85,15 @@ export const PetCard = ({ pet }) => {
     setFieldValue,
   } = useFormik({
     initialValues: {
-      name: pet.name || 'New Pet',
-      birthDate: pet.birthDate || '00.00.0000',
-      breed: pet.breed || 'some breed',
-      comments: pet.comments || 'Lorem...',
+      name: name || 'New Pet',
+      birthDate: birthDate || '00.00.0000',
+      breed: breed || 'some breed',
+      comments: comments || 'Lorem...',
+      photoURL: photoURL,
     },
     validationSchema: validationOne,
     onSubmit: values => {
-      console.log('values', values);
-      dispatch(editPet(_id, values));
+      dispatch(editPet({ _id, values }));
     },
   });
 
@@ -113,7 +102,6 @@ export const PetCard = ({ pet }) => {
       <Box pt={20} border="normal" borderColor="transparent">
         <Image src={photoURL || DEFAULT_IMAGE} alt="My pet" width={240} />
       </Box>
-
       <Box pt={20} position="relative">
         <DataInputWrapp>
           <Form onSubmit={handleSubmit}>
@@ -124,7 +112,7 @@ export const PetCard = ({ pet }) => {
                 type="text"
                 name="name"
                 value={values.name}
-                placeholder={pet?.name}
+                placeholder={name}
                 disabled={isNameDisabled}
                 onChange={handleChange('name')}
                 onBlur={handleBlur('name')}
@@ -212,7 +200,7 @@ export const PetCard = ({ pet }) => {
                 type="text"
                 name="breed"
                 value={values.breed}
-                placeholder={pet?.breed}
+                placeholder={breed}
                 disabled={isBreedDisabled}
                 onChange={handleChange('breed')}
                 onBlur={handleBlur('breed')}
@@ -251,7 +239,7 @@ export const PetCard = ({ pet }) => {
                 type="text"
                 name="comments"
                 value={values.comments}
-                placeholder={pet?.comments}
+                placeholder={comments}
                 disabled={isCommentsDisabled}
                 onChange={handleChange('comments')}
                 onBlur={handleBlur('comments')}
@@ -282,13 +270,16 @@ export const PetCard = ({ pet }) => {
                 </EditBtn>
               )}
             </InputWrapper>
+            {/*Delete*/}
+            <InputWrapper>
+              <Label htmlFor="delete">Delete</Label>
+              <BtnDelete type="button" onClick={handleDelete}>
+                <DeleteIcon width={20} height={20} />
+              </BtnDelete>
+            </InputWrapper>
           </Form>
         </DataInputWrapp>
       </Box>
-
-      <BtnDelete type="button" onClick={handleDelete}>
-        <DeleteIcon width={20} height={20} />
-      </BtnDelete>
     </CardWrapper>
   );
 };

@@ -136,10 +136,11 @@ const authSlice = createSlice({
       state.error = false;
     },
     [editPet.fulfilled](state, action) {
-      const index = state.user.myPets.findIndex(
-        pet => pet._id === action.payload._id
-      );
-      state.user.myPets.splice(index, 1);
+      console.log('action.payload', action.payload);
+      // state.user.myPets = {
+      //   ...state.user.myPets,
+      //   ...action.payload,
+      // };
 
       state.isRefreshing = false;
       state.error = false;
