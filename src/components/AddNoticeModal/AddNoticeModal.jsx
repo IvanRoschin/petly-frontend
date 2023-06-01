@@ -67,7 +67,7 @@ const AddNoticeModal = ({ handleButtonToggle }) => {
       // formData.append('breed', newData.breed);
       // formData.append('sex', newData.sex);
       // formData.append('location', newData.location);
-      // console.log('location', newData.location);
+      // ('location', newData.location);
       // formData.append('comments', newData.comments);
       // formData.append('photoURL', newData.photoURL);
       // if (newData.price) {

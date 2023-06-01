@@ -136,7 +136,6 @@ const authSlice = createSlice({
       state.error = false;
     },
     [editPet.fulfilled](state, action) {
-      console.log('action.payload', action.payload);
       // state.user.myPets = {
       //   ...state.user.myPets,
       //   ...action.payload,

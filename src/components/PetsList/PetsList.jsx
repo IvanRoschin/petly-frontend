@@ -7,12 +7,9 @@ import emptyPets from 'images/emptyPets.jpg';
 
 import { List, Items, Img, ImgContainer } from './PetsList.styled';
 import { PetCard } from '../PetCard';
-// import { useEffect } from 'react';
 
 export const PetsList = () => {
-  // const dispatch = useDispatch();
   const pets = useSelector(selectUser).myPets;
-  console.log('pets', pets);
 
   const card = pets?.map(pet => {
     return (
@@ -21,9 +18,6 @@ export const PetsList = () => {
       </Items>
     );
   });
-  // useEffect(() => {
-  //   dispatch(refreshUser());
-  // }, [dispatch]);
 
   return (
     <>

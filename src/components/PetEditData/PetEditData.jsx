@@ -25,7 +25,6 @@ import {
 import { editPet } from '../../redux/auth/operations';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from 'hooks';
-import { commonRoutes } from 'api/baseSettings';
 
 export const PetEditData = () => {
   const { t } = useTranslation();
@@ -36,7 +35,6 @@ export const PetEditData = () => {
   const [isBreedDisabled, setIsBreedDisabled] = useState(true);
   const [isCommentsDisabled, setIsCommentsDisabled] = useState(true);
   const [isImageDisabled, setIsImageDisabled] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
 
   const iconColorDisabled = 'rgba(0,0,0,0.6)';
   const dispatch = useDispatch();
@@ -88,7 +86,6 @@ export const PetEditData = () => {
     validationSchema: petAddSchema,
 
     onSubmit: values => {
-      console.log('values', values);
       dispatch(editPet(values));
     },
   });

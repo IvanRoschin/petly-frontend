@@ -189,7 +189,6 @@ export const addPet = createAsyncThunk(
 export const editPet = createAsyncThunk(
   'auth/editPet',
   async ({ _id, values }, thunkAPI) => {
-    console.log('valuesPETS', values);
     try {
       const { data } = await privateRoutes.patch(`api/pets/${_id}`, values);
       return data;

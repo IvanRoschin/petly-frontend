@@ -111,7 +111,6 @@ const StepTwo = props => {
             name="location"
             options={results}
             onChange={(location, _, e) => {
-              console.log('location', location);
               setFieldValue('location', location);
             }}
             placeholder={t('City_region')}

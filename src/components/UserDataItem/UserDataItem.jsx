@@ -154,7 +154,7 @@ const UserDataItem = () => {
         <Form onSubmit={handleSubmit}>
           {/* Name */}
           <InputWrapper>
-            <Label htmlFor="name">{t('Name')}:</Label>
+            <Label>{t('Name')}:</Label>
             <Input
               type="text"
               name="name"
@@ -193,7 +193,7 @@ const UserDataItem = () => {
 
           {/* Email */}
           <InputWrapper>
-            <Label htmlFor="email">{t('Email')}:</Label>
+            <Label>{t('Email')}:</Label>
             <Input
               type="text"
               name="email"
@@ -230,28 +230,9 @@ const UserDataItem = () => {
 
           {/* BirthDate */}
           <InputWrapper>
-            <LabelFlatpickr htmlFor="birthDate">
-              {t('Birthday')}:
-            </LabelFlatpickr>
+            <LabelFlatpickr>{t('Birthday')}:</LabelFlatpickr>
             <InputFlatpickrWrapp>
               <FlatpickrStyled
-                // selected={startDate}
-                // openToDate={new Date(1993, 0, 1)}
-                // active={!isBirthdayDisabled}
-                // dateFormat="dd.MM.y"
-                // name="birthDate"
-                // locale="uk"
-                // placeholderText={'00.00.0000'}
-                // disabled={isBirthdayDisabled}
-                // onChange={date => {
-                //   setFieldValue('birthDate', date);
-                //   setStartDate(date);
-                // }}
-                // minDate={new Date('01.01.1900')}
-                // maxDate={new Date()}
-                // showDisabledMonthNavigation
-                // shouldCloseOnSelect={true}
-
                 data-enable-time
                 name="birthDate"
                 value={values?.birthDate}
@@ -346,10 +327,10 @@ const UserDataItem = () => {
           <InputWrapper>
             <Label>{t('City')}:</Label>
             <SelectInput
+              name="city"
               onInputChange={handleOnInputChange}
               options={results}
               onChange={cityValue => {
-                console.log('cityValue', cityValue);
                 setFieldValue('city', cityValue);
               }}
               isSearchable="true"
