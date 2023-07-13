@@ -159,7 +159,6 @@ i18n
           City_required: 'Please choose your city',
           Want_leave: 'Do you really want to leave?',
           Want_delete: `Do you really want to delete user? Your Pet's and Notice's will delete too`,
-
           Yes: 'Yes',
           No: 'No',
           Type_pet_price: 'Type pet price',
